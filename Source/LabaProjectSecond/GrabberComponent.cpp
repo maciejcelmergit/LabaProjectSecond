@@ -114,3 +114,16 @@ void UGrabberComponent::Throw()
 	}
 }
 
+FString UGrabberComponent::GetGrabbedActorName()
+{
+	if (m_physicsHandle && m_physicsHandle->GetGrabbedComponent())
+	{
+		return m_physicsHandle->GetGrabbedComponent()->GetOwner()->GetActorNameOrLabel();
+
+
+		//return AActor::GetDebugName(m_physicsHandle->GetGrabbedComponent()->GetOwner());
+	}
+	
+	return FString();
+}
+

@@ -31,6 +31,9 @@ public:
 	void Release();
 	void Throw();
 
+	UFUNCTION(BlueprintPure)
+	FString GetGrabbedActorName();
+
 private:
 	UInputComponent* m_inputComponent = nullptr;
 	UPhysicsHandleComponent* m_physicsHandle = nullptr;
