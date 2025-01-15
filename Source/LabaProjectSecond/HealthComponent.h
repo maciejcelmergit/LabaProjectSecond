@@ -56,4 +56,6 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	float HealthPerSecond = 0.0f;	
+
+	bool isDead = false;
 };

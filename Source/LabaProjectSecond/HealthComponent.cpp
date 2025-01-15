@@ -2,6 +2,8 @@
 
 
 #include "HealthComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "BarrelGameMode.h"
 
 // Sets default values for this component's properties
 UHealthComponent::UHealthComponent()
@@ -58,6 +60,16 @@ void UHealthComponent::ApplyDamage(float damage)
 {
 	CurrentHealth -= damage;
 	CurrentHealth = FMath::Clamp(CurrentHealth, 0.0f, MaxHealth);
+
+	if (CurrentHealth <= 0)
+	{
+		ABarrelGameMode* GameMode =	Cast<ABarrelGameMode>(UGameplayStatics::GetGameMode(this));
+		if(GameMode && !isDead)
+		{
+			GameMode->OnActorDeath(GetOwner());
+			isDead = true;
+		}
+	}
 }
 
 void UHealthComponent::Heal(float heal)
